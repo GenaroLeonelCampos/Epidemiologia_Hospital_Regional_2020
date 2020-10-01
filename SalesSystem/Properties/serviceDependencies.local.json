@@ -3,6 +3,11 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "AppicationDbContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "Conexion",
+      "secretStore": "LocalSecretsFile"
     }
   }
 }
