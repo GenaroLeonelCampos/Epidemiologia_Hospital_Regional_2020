@@ -36,8 +36,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Mantenimiento</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>
-                                    <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
+                                    <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>                                    
                                     <a class="dropdown-item" asp-area="" asp-controller="Pais" asp-action="Index">Pais</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Provincia" asp-action="Index">Provincia</a>
@@ -51,6 +50,7 @@
                             <li class="nav-item  dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administración</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Establecimiento" asp-action="Index">Establecimiento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Depmedico" asp-action="Index">Departamento Médico</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Cartserv" asp-action="Index">Servicio</a>
