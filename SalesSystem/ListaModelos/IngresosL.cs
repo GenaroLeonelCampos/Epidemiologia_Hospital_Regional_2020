@@ -25,15 +25,15 @@ namespace Epidemiologia.ListaModelos
         [MaxLength(150)]
         [Required(ErrorMessage = "Este campo es requerido")]
         [DisplayName("Observación")]
-        public string? Observacion { get; set; }
+        public string Observacion { get; set; }
         public int Estado { get; set; }
         [Required(ErrorMessage = "Debe ingresar un {0}")]
         [DisplayName("Responsable")]
         public int? ResponsableId { get; set; }
         [DisplayName("Medicamento")]
-        public string? Medicamento { get; set; }
+        public string Medicamento { get; set; }
         [DisplayName("Responsable")]
-        public string? Responsable { get; set; }
+        public string Responsable { get; set; }
 
     }
 }
