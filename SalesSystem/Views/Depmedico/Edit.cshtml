@@ -1,0 +1,42 @@
+﻿@model Epidemiologia.Class.Depmedico
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<ol class="breadcrumb badge-dark">
+    <table class="egt col-md-12">
+        <tr>
+            <td> <h1>Editar departamento medico</h1></td>
+            <td align="right"><a asp-action="Index" class="btn btn-success">Lista</a></td>
+        </tr>
+    </table>
+</ol>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DepmedicoId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EstablecimientoId" class="control-label"></label>
+                        <select asp-for="EstablecimientoId" class="form-control" asp-items="ViewBag.EstablecimientoId"></select>
+                        <span asp-validation-for="EstablecimientoId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Epidemiologia</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/original.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 ">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo-google.png" class="mx-auto v-80 imglogo">@*Epidemiologia*@
+                </a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Mantenimiento</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>
+                                    <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Pais" asp-action="Index">Pais</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Provincia" asp-action="Index">Provincia</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Distrito" asp-action="Index">Distrito</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="Ciudad" asp-action="Index">Ciudad</a>*@
+                                    <a class="dropdown-item" asp-area="" asp-controller="Pertenencia" asp-action="Index">Pertenencia</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Tipdoc" asp-action="Index">Tipo Documento</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Profesion" asp-action="Index">Profesión</a>
+                                </div>
+                            </li>
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administración</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Establecimiento" asp-action="Index">Establecimiento</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Depmedico" asp-action="Index">Departamento Médico</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Cartserv" asp-action="Index">Servicio</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="UnidLab" asp-action="Index">Unidad Laboral</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="GrupOcup" asp-action="Index">Grupo Ocupacional</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>*@
+                                    <a class="dropdown-item" asp-area="" asp-controller="Responsable" asp-action="Index">Responsable</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="PerSal" asp-action="Index">Personal de Salud</a>
+                                </div>
+                            </li>
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Gestión y Procesos</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Medicamento" asp-action="Index">Farmacia</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Ingresos" asp-action="Index">Ingresos farmacia</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Salida" asp-action="Index">Salidas farmacia</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-dark">
+        <div class="container" align="center">
+            <h6>  &copy; Unidad de Informática - Epidemiologia  - 2020 - <a asp-area="" asp-controller="Home" asp-action="Privacy">® Derechos Reservados</a></h6>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Uploadpicture.js" asp-append-version="true"></script>
+    <script src="~/js/Principal.js" asp-append-version="true"></script>
+    <script src="~/js/User.js" asp-append-version="true"></script>
+    <script src="~/js/Customers.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/original.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

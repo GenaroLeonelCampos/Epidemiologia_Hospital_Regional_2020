@@ -1,0 +1,77 @@
+﻿@*@model IEnumerable<Epidemiologia.Class.Pais>*@
+@model Paginacion<Epidemiologia.Class.Pais>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<ol class="breadcrumb  badge-dark">
+    <table class="egt col-md-12">
+        <tr>
+            <td align="left"> <h2>Listado de pais</h2></td>
+            <td align="right"><h1><a asp-action="Create" class="btn btn-light">Nuevo</a></h1></td>
+        </tr>
+    </table>
+</ol>
+
+@*<form asp-controller="Pais" asp-action="Index" method="post" class="mb-2" style="display:grid; grid-template-columns:2fr 2fr 1fr 1fr" id="frmFormulario">
+    <label><h5>Ingrese nombre pais</h5></label>
+    <input type="text" id="descripcion" class="form form-control" name="Descripcion" placeholder="Ingrese nombre de pais" onkeyup="Buscar()" value="@descripcionmedicamento" />
+    <input type="submit" value="Buscar" class="btn btn-success" />
+    <input type="button" value="Limpiar" class="btn btn-danger" onclick="Limpiar()" />
+</form>*@
+
+<table class="table" id="table">
+    <thead class="badge-dark">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Descripcion)*@
+                Descripcion
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PaisId"><i class="fa fa-edit btn btn-primary" aria-hidden="true"></i></a> |
+                    @*<a asp-action="Details" asp-route-id="@item.PaisId">Details</a> |*@
+                    <a asp-action="Delete" asp-route-id="@item.PaisId"  class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="return confirm('Esta seguro de eliminar el registros?')"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/sweetalert.js"></script>
+
+<script>
+
+    function Limpiar() {
+        document.getElementById("descripcion").value = "";
+        document.getElementById("frmFormulario").submit();
+    }
+
+</script>
+
+@*@{
+    var prevDisabled = !Model.PreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.NextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-success @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Siguiente
+</a>*@

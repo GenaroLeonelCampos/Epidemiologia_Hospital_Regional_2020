@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Epidemiologia.Class.Pertenencia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<ol class="breadcrumb  badge-dark">
+    <table class="egt col-md-12">
+        <tr>
+            <td align="left"> <h2>Listado de pertenencias</h2></td>
+            <td align="right"><h1><a asp-action="Create" class="btn btn-light">Nuevo</a></h1></td>
+        </tr>
+    </table>
+</ol>
+<table class="table" id="table">
+    <thead class="badge-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PertenenciaId" class="fa fa-edit btn btn-primary"></a> |
+                    @*<a asp-action="Details" asp-route-id="@item.PertenenciaId">Details</a> |*@
+                    <a asp-action="Delete" asp-route-id="@item.PertenenciaId" class="fa fa-trash btn btn-danger" onclick="return confirm('Esta seguro de eliminar el registros?')"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/sweetalert.js"></script>
