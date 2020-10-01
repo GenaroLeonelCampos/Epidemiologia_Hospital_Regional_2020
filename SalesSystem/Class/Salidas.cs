@@ -31,7 +31,7 @@ namespace Epidemiologia.Class
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? FechaDistrib { get; set; }
         [DisplayName("Descripción")]
-        public string? Descripcion { get; set; }
+        public string Descripcion { get; set; }
         [DisplayName("Cantidad")]
         [Required(ErrorMessage = "Este campo es requerido")]
         public int? Cantidad { get; set; }
