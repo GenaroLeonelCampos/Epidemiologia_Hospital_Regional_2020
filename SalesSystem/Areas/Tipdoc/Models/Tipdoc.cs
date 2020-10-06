@@ -12,6 +12,6 @@ namespace Epidemiologia.Areas.Tipdoc.Models
         [Key]
         public int TipdocId { get; set; }
         public string Descripcion { get; set; }
-        public virtual ICollection<Responsable> Responsable { get; set; }
+        //public virtual ICollection<Responsable> Responsable { get; set; }
     }
 }

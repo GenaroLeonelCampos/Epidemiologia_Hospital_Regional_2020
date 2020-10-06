@@ -19,6 +19,5 @@ namespace Epidemiologia.Class
         public Depmedico Depmedico { get; set; }
         public virtual ICollection<UnidLab> UnidLab { get; set; }
         public virtual ICollection<PerSal> PerSal { get; set; }
-        //public virtual ICollection<Salidas> Salidas { get; set; }
     }
 }

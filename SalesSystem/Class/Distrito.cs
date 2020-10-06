@@ -18,7 +18,7 @@ namespace Epidemiologia.Class
         public int ProvinciaId { get; set; }
         public Provincia Provincia { get; set; }
         public virtual ICollection<Establecimiento> Establecimiento { get; set; }
-        public virtual ICollection<Responsable> Responsable { get; set; }
+        //public virtual ICollection<Responsable> Responsable { get; set; }
         public virtual ICollection<PerSal> PerSal { get; set; }
     }
 }

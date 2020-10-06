@@ -17,6 +17,6 @@ namespace Epidemiologia.Class
         public int? CartservId { get; set; }
         public Cartserv Cartserv { get; set; }       
         public virtual ICollection<GrupOcup> GrupOcup { get; set; }
-        public virtual ICollection<Responsable> Responsable { get; set; }
+        //public virtual ICollection<Responsable> Responsable { get; set; }
     }
 }

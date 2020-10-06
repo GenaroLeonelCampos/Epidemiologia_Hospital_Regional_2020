@@ -14,37 +14,33 @@ namespace Epidemiologia.Controllers
     {
         public IActionResult Index()
         {
-            List<ResponsableL> listaResponsable = new List<ResponsableL>();
+            List<ResponsableL> listamedicamento = new List<ResponsableL>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                //if (oResponsableL.Estado == 1)
-                //{
-                listaResponsable = (from respons in db.Responsable
-                                    join persal in db.PerSal
-                                    on respons.PerSalId equals persal.PerSalId
-                                    join prof in db.Profesion
-                                    on respons.ProfesionId equals prof.ProfesionId
+                listamedicamento = (from resp in db.Responsable
+                                    join salu in db.PerSal
+                                    on resp.ResponsableId equals salu.PerSalId
+                                    join prof in db. Profesion
+                                    on resp.ProfesionId equals prof.ProfesionId
                                     select new ResponsableL
                                     {
-                                        ResponsableId = respons.ResponsableId,
-                                        Personal = persal.Nombres + ' ' + persal.Apellidos,
+                                        ResponsableId = resp.ResponsableId,
+                                        PersonalSalud = salu.Apellidos+' '+salu.Apellidos,
                                         Profesion = prof.Descripcion,
-                                        Fecha_Ingreso = (DateTime)respons.Fecha_Ingreso
+                                        Fecha_Ingreso = resp.Fecha_Ingreso
                                     }).ToList();
             }
-            return View(listaResponsable);
+            return View(listamedicamento);
         }
         public IActionResult Agregar()
         {
-            ViewBag.listaPersonal = listaPersonal();
-            ViewBag.listaProfesion = listaProfesion();
+            ViewBag.listaPersonalSalud = listaPersonalSalud();
             return View();
         }
         [HttpPost]
         public IActionResult Agregar(ResponsableL oResponsableL)
         {
-            ViewBag.listaPersonal = listaPersonal();
-            ViewBag.listaProfesion = listaProfesion();
+            ViewBag.listaPersonalSalud = listaPersonalSalud();
             try
             {
                 if (!ModelState.IsValid)
@@ -59,7 +55,7 @@ namespace Epidemiologia.Controllers
                         oResponsable.PerSalId = oResponsableL.PerSalId;
                         oResponsable.ProfesionId = oResponsableL.ProfesionId;
                         oResponsable.Fecha_Ingreso = DateTime.Now;
-                        oResponsable.Estado = 1;
+                        oResponsable.Estado =1;       
                         db.Responsable.Add(oResponsable);
                         db.SaveChanges();
                     }
@@ -72,47 +68,25 @@ namespace Epidemiologia.Controllers
             }
             return RedirectToAction("Index");
         }
-        public List<SelectListItem> listaPersonal()
+        public List<SelectListItem> listaPersonalSalud()
         {
-            List<SelectListItem> listaPersonal = new List<SelectListItem>();
+            List<SelectListItem> listaPersonalSalud = new List<SelectListItem>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                listaPersonal = (from salud in db.PerSal
+                listaPersonalSalud = (from persa in db.PerSal
                                  select new SelectListItem
                                  {
-                                     Text = salud.Nombres + ' ' + salud.Apellidos,
-                                     Value = salud.PerSalId.ToString()
+                                     Text = persa.Apellidos + ' ' + persa.Nombres,
+                                     Value = persa.PerSalId.ToString()
                                  }).ToList();
-                listaPersonal.Insert(0, new SelectListItem
+                listaPersonalSalud.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",
                     Value = ""
                 });
 
             }
-            return listaPersonal;
-        }
-        public List<SelectListItem> listaProfesion()
-        {
-            List<SelectListItem> listaProfesion = new List<SelectListItem>();
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                listaProfesion = (from prof in db.Profesion
-                                  where prof.Descripcion == "Químico Farmacéutico" || prof.Descripcion == "Técnico en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia I"
-                                || prof.Descripcion == "Técnico/a en Farmacia II"
-                                  select new SelectListItem
-                                  {
-                                      Text = prof.Descripcion,
-                                      Value = prof.ProfesionId.ToString()
-                                  }).ToList();
-                listaProfesion.Insert(0, new SelectListItem
-                {
-                    Text = "--Selecciona--",
-                    Value = ""
-                });
-
-            }
-            return listaProfesion;
+            return listaPersonalSalud;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Epidemiologia.Class
         public int DepartamentoId { get; set; }
         public Departamento Departamento { get; set; }
         public virtual ICollection<Distrito> Distrito { get; set; }
-        public virtual ICollection<Responsable> Responsable { get; set; }
+        //public virtual ICollection<Responsable> Responsable { get; set; }
         public virtual ICollection<PerSal> PerSal { get; set; }
     }
 }
