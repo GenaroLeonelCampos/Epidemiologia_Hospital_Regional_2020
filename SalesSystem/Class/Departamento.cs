@@ -18,9 +18,6 @@ namespace Epidemiologia.Class
         public int PaisId { get; set; }
         public Pais Pais { get; set; }
         public virtual ICollection<Provincia> Provincia { get; set; }
-        public virtual ICollection<Responsable> Responsable { get; set; }
         public virtual ICollection<PerSal> PerSal { get; set; }
-        //public virtual ICollection<SalidasMedicAlmac> SalidasMedicAlmac { get; set; }
-        //public virtual ICollection<Distribucion> Distribucion { get; set; }
     }
 }

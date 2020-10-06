@@ -2,164 +2,117 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Epidemiologia.Class;
 using Epidemiologia.Data;
+using Epidemiologia.ListaModelos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Epidemiologia.Controllers
 {
     public class ResponsableController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public ResponsableController(ApplicationDbContext context)
+        public IActionResult Index()
         {
-            _context = context;
-        }
-
-        // GET: Responsable
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Responsable.Include(r => r.Departamento).Include(r => r.Distrito).Include(r => r.Profesion).Include(r => r.Provincia).Include(r => r.Tipdoc).Include(r => r.UnidLab);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Responsable/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            List<ResponsableL> listaResponsable = new List<ResponsableL>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                return NotFound();
+                //if (oResponsableL.Estado == 1)
+                //{
+                listaResponsable = (from respons in db.Responsable
+                                    join persal in db.PerSal
+                                    on respons.PerSalId equals persal.PerSalId
+                                    join prof in db.Profesion
+                                    on respons.ProfesionId equals prof.ProfesionId
+                                    select new ResponsableL
+                                    {
+                                        ResponsableId = respons.ResponsableId,
+                                        Personal = persal.Nombres + ' ' + persal.Apellidos,
+                                        Profesion = prof.Descripcion,
+                                        Fecha_Ingreso = (DateTime)respons.Fecha_Ingreso
+                                    }).ToList();
             }
-
-            var responsable = await _context.Responsable
-                .Include(r => r.Departamento)
-                .Include(r => r.Distrito)
-                .Include(r => r.Profesion)
-                .Include(r => r.Provincia)
-                .Include(r => r.Tipdoc)
-                .Include(r => r.UnidLab)
-                .FirstOrDefaultAsync(m => m.ResponsableId == id);
-            if (responsable == null)
-            {
-                return NotFound();
-            }
-
-            return View(responsable);
+            return View(listaResponsable);
         }
-
-        // GET: Responsable/Create
-        public IActionResult Create()
+        public IActionResult Agregar()
         {
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Descripcion");
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "DistritoId", "Descripcion");
-            ViewData["ProfesionId"] = new SelectList(_context.Profesion, "ProfesionId", "Descripcion");
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "ProvinciaId", "Descripcion");
-            ViewData["TipdocId"] = new SelectList(_context.Tipdoc, "TipdocId", "Descripcion");
-            ViewData["UnidLabId"] = new SelectList(_context.UnidLab, "UnidLabId", "Descripcion");
+            ViewBag.listaPersonal = listaPersonal();
+            ViewBag.listaProfesion = listaProfesion();
             return View();
         }
-
-        // POST: Responsable/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ResponsableId,UnidLabId,Nombres,Apellidos,ProfesionId,TipdocId,NdocIden,Celular,Correo,DepartamentoId,ProvinciaId,DistritoId,Direccion,Condicion")] Responsable responsable)
+        public IActionResult Agregar(ResponsableL oResponsableL)
         {
-            if (ModelState.IsValid)
+            ViewBag.listaPersonal = listaPersonal();
+            ViewBag.listaProfesion = listaProfesion();
+            try
             {
-                _context.Add(responsable);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Descripcion", responsable.DepartamentoId);
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "DistritoId", "Descripcion", responsable.DistritoId);
-            ViewData["ProfesionId"] = new SelectList(_context.Profesion, "ProfesionId", "Descripcion", responsable.ProfesionId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "ProvinciaId", "Descripcion", responsable.ProvinciaId);
-            ViewData["TipdocId"] = new SelectList(_context.Tipdoc, "TipdocId", "Descripcion", responsable.TipdocId);
-            ViewData["UnidLabId"] = new SelectList(_context.UnidLab, "UnidLabId", "Descripcion", responsable.UnidLabId);
-            return View(responsable);
-        }
-
-        // GET: Responsable/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var responsable = await _context.Responsable.FindAsync(id);
-            if (responsable == null)
-            {
-                return NotFound();
-            }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Descripcion", responsable.DepartamentoId);
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "DistritoId", "Descripcion", responsable.DistritoId);
-            ViewData["ProfesionId"] = new SelectList(_context.Profesion, "ProfesionId", "Descripcion", responsable.ProfesionId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "ProvinciaId", "Descripcion", responsable.ProvinciaId);
-            ViewData["TipdocId"] = new SelectList(_context.Tipdoc, "TipdocId", "Descripcion", responsable.TipdocId);
-            ViewData["UnidLabId"] = new SelectList(_context.UnidLab, "UnidLabId", "Descripcion", responsable.UnidLabId);
-            return View(responsable);
-        }
-
-        // POST: Responsable/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ResponsableId,UnidLabId,Nombres,Apellidos,ProfesionId,TipdocId,NdocIden,Celular,Correo,DepartamentoId,ProvinciaId,DistritoId,Direccion,Condicion")] Responsable responsable)
-        {
-            if (id != responsable.ResponsableId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (!ModelState.IsValid)
                 {
-                    _context.Update(responsable);
-                    await _context.SaveChangesAsync();
+                    return View(oResponsableL);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ResponsableExists(responsable.ResponsableId))
+                    using (ApplicationDbContext db = new ApplicationDbContext())
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        Responsable oResponsable = new Responsable();
+                        oResponsable.PerSalId = oResponsableL.PerSalId;
+                        oResponsable.ProfesionId = oResponsableL.ProfesionId;
+                        oResponsable.Fecha_Ingreso = DateTime.Now;
+                        oResponsable.Estado = 1;
+                        db.Responsable.Add(oResponsable);
+                        db.SaveChanges();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Descripcion", responsable.DepartamentoId);
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "DistritoId", "Descripcion", responsable.DistritoId);
-            ViewData["ProfesionId"] = new SelectList(_context.Profesion, "ProfesionId", "Descripcion", responsable.ProfesionId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "ProvinciaId", "Descripcion", responsable.ProvinciaId);
-            ViewData["TipdocId"] = new SelectList(_context.Tipdoc, "TipdocId", "Descripcion", responsable.TipdocId);
-            ViewData["UnidLabId"] = new SelectList(_context.UnidLab, "UnidLabId", "Descripcion", responsable.UnidLabId);
-            return View(responsable);
+            catch (Exception ex)
+            {
+                return View(oResponsableL);
+            }
+            return RedirectToAction("Index");
         }
-
-        
-        // POST: Responsable/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public List<SelectListItem> listaPersonal()
         {
-            var responsable = await _context.Responsable.FindAsync(id);
-            _context.Responsable.Remove(responsable);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            List<SelectListItem> listaPersonal = new List<SelectListItem>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                listaPersonal = (from salud in db.PerSal
+                                 select new SelectListItem
+                                 {
+                                     Text = salud.Nombres + ' ' + salud.Apellidos,
+                                     Value = salud.PerSalId.ToString()
+                                 }).ToList();
+                listaPersonal.Insert(0, new SelectListItem
+                {
+                    Text = "--Selecciona--",
+                    Value = ""
+                });
+
+            }
+            return listaPersonal;
         }
-
-        private bool ResponsableExists(int id)
+        public List<SelectListItem> listaProfesion()
         {
-            return _context.Responsable.Any(e => e.ResponsableId == id);
+            List<SelectListItem> listaProfesion = new List<SelectListItem>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                listaProfesion = (from prof in db.Profesion
+                                  where prof.Descripcion == "Químico Farmacéutico" || prof.Descripcion == "Técnico en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia I"
+                                || prof.Descripcion == "Técnico/a en Farmacia II"
+                                  select new SelectListItem
+                                  {
+                                      Text = prof.Descripcion,
+                                      Value = prof.ProfesionId.ToString()
+                                  }).ToList();
+                listaProfesion.Insert(0, new SelectListItem
+                {
+                    Text = "--Selecciona--",
+                    Value = ""
+                });
+
+            }
+            return listaProfesion;
         }
     }
 }

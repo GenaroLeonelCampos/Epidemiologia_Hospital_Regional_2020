@@ -38,11 +38,8 @@ namespace Epidemiologia.Data
         public DbSet<Epidemiologia.Class.Tipdoc> Tipdoc { get; set; }
         public DbSet<Epidemiologia.Class.Profesion> Profesion { get; set; }
         public DbSet<Epidemiologia.Class.Responsable> Responsable { get; set; }
-        public DbSet<Epidemiologia.Class.PerSal> PerSal { get; set; }      
-        public DbSet<Epidemiologia.Class.Ingresos> Ingresos { get; set; }
-        public DbSet<Epidemiologia.Class.Salidas> Salidas { get; set; }
-        public DbSet<Epidemiologia.ListaModelos.MedicamentoL> MedicamentoL { get; set; }
-        public DbSet<Epidemiologia.ListaModelos.IngresosL> IngresosL { get; set; }
-        public DbSet<Epidemiologia.ListaModelos.SalidasL> SalidasL { get; set; }
+        public DbSet<Epidemiologia.Class.PerSal> PerSal { get; set; }    
+        public DbSet<Epidemiologia.Class.AgregMedic> AgregMedic { get; set; }
+        public DbSet<Epidemiologia.Class.SalidMedic> SalidMedic { get; set; }
     }
 }

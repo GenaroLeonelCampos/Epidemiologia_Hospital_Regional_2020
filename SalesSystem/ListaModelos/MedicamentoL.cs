@@ -14,28 +14,24 @@ namespace Epidemiologia.ListaModelos
         [MaxLength(150)]
         [Required(ErrorMessage = "Este campo es requerido")]
         [DisplayName("Código SISMED")]
-        public string? Cod_sismed { get; set; }
+        public string Cod_sismed { get; set; }
         [DisplayName("Denominación")]
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string? Denominacion { get; set; }
+        public string Denominacion { get; set; }
         [DisplayName("Concentración")]
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string? Concentracion { get; set; }
+        public string Concentracion { get; set; }
         [DisplayName("Presentación")]
         [Required(ErrorMessage = "Este campo es requerido")]
-        public string? Presentacion { get; set; }
-        //[DisplayName("N° Ingresos")]
-        //[Required(ErrorMessage = "Este campo es requerido")]
-        //public int? Ingresos { get; set; }
+        public string Presentacion { get; set; }
+        [Required(ErrorMessage = "Debe ingresar una {0}")]
         [DisplayName("Saldo")]
         public int? Saldo { get; set; }
-        [DisplayName("Fecha de Ingreso")]
-        [Required(ErrorMessage = "Debe ingresar una {0}")]
+        [DisplayName("Fecha de Ingreso")]       
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? Fecha_Ingreso { get; set; }
-        [DisplayName("Observación")]    
-        [Required(ErrorMessage = "Debe ingresar una {0}")]
-        public string? Observacion { get; set; }
+        [DisplayName("Observación")]           
+        public string Observacion { get; set; }
     }
 }

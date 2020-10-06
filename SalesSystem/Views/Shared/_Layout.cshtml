@@ -30,43 +30,45 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                            </li>
+                            @*<li class="nav-item dropdown">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+        </li>*@
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Mantenimiento</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>                                    
                                     <a class="dropdown-item" asp-area="" asp-controller="Pais" asp-action="Index">Pais</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Provincia" asp-action="Index">Provincia</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Distrito" asp-action="Index">Distrito</a>
-                                    @*<a class="dropdown-item" asp-area="" asp-controller="Ciudad" asp-action="Index">Ciudad</a>*@
                                     <a class="dropdown-item" asp-area="" asp-controller="Pertenencia" asp-action="Index">Pertenencia</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Tipdoc" asp-action="Index">Tipo Documento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Profesion" asp-action="Index">Profesión</a>
-                                </div>
-                            </li>
-                            <li class="nav-item  dropdown">
-                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administración</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Establecimiento" asp-action="Index">Establecimiento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Depmedico" asp-action="Index">Departamento Médico</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Cartserv" asp-action="Index">Servicio</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="UnidLab" asp-action="Index">Unidad Laboral</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="GrupOcup" asp-action="Index">Grupo Ocupacional</a>
-                                    @*<a class="dropdown-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>*@
-                                    <a class="dropdown-item" asp-area="" asp-controller="Responsable" asp-action="Index">Responsable</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="PerSal" asp-action="Index">Personal de Salud</a>
                                 </div>
                             </li>
                             <li class="nav-item  dropdown">
-                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Gestión y Procesos</a>
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Farmacia</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-area="" asp-controller="Medicamento" asp-action="Index">Almacen de Farmacia</a>
-                                    @*<a class="dropdown-item" asp-area="" asp-controller="Ingresos" asp-action="Index">Salida de insumo a responsables</a>*@
-                                    <a class="dropdown-item" asp-area="" asp-controller="Salida" asp-action="Index">Salida de insumo a usuarios</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="AgregMedic" asp-action="Index">Ingresos a Farmacia</a>                                    
+                                </div>
+                            </li>
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Gestión</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>
+                                    <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="PerSal" asp-action="Index">Personal de Salud</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Responsable" asp-action="Index">Responsables de Farmacia</a>
+                                </div>
+                            </li>
+                            <li class="nav-item  dropdown">
+                                <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Procesos</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                     <a class="dropdown-item" asp-area="" asp-controller="SalidMedic" asp-action="Index">Salidas a usuarios</a>
                                 </div>
                             </li>
                         </ul>
@@ -83,7 +85,7 @@
 
     <footer class="border-top footer text-dark">
         <div class="container" align="center">
-            <h6>  &copy; Unidad de Informática - Epidemiologia  - 2020 - <a asp-area="" asp-controller="Home" asp-action="Privacy">® Derechos Reservados</a></h6>
+            <h6>  &copy; Unidad de Informática - 2020 - <a asp-area="" asp-controller="Home" asp-action="Privacy">® Derechos Reservados</a></h6>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.js"></script>

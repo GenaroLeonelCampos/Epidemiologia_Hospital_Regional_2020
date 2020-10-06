@@ -31,8 +31,7 @@ namespace Epidemiologia.Class
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? Fecha_Ingreso { get; set; }
         [DisplayName("Observación")]
-        [Required(ErrorMessage = "Este campo es requerido")]
-        public string? Observacion { get; set; }    
+        public string Observacion { get; set; }    
         [DisplayName("Estado")]
         public int? Estado { get; set; }
 

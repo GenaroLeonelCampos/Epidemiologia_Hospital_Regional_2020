@@ -58,65 +58,12 @@ namespace Epidemiologia.Controllers
                 }
             }
         }
-
-        //private readonly ApplicationDbContext _context;
-        //public static List<MedicamentoL> lista;
-        //public MedicamentoController(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
-        //public static List<MedicamentoL> Lista;
-        ////Descarga
-        //public FileResult exportarExcel()
-        //{
-        //    string[] cabeceras = { "MedicamentoId"};
-        //    string[] nombrePropiedades = { "MedicamentoId"};
-        //    byte[] buffer = exportarExcelDatos(cabeceras, nombrePropiedades, lista);
-        //    return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        //}
-        ////Genera archivo       
-        //public byte[] exportarExcelDatos<T>(string[] cabeceras, string[] nombrePropiedades,
-        //    List<T> lista)
-        //{
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-        //        using (ExcelPackage ep = new ExcelPackage())
-        //        {
-        //            ep.Workbook.Worksheets.Add("Hoja");
-        //            ExcelWorksheet ew = ep.Workbook.Worksheets[0];
-        //            for (int i = 0; i < cabeceras.Length; i++)
-        //            {
-        //                ew.Cells[1, i + 1].Value = cabeceras[i];
-        //                ew.Column(i + 1).Width = 50;
-        //            }
-        //            int fila = 2;
-        //            int col = 1;
-
-        //            foreach (object item in lista)
-        //            {
-        //                col = 1;
-        //                foreach (string propiedad in nombrePropiedades)
-        //                {
-        //                    ew.Cells[fila, col].Value =
-        //                        item.GetType().GetProperty(propiedad).GetValue(item).ToString();
-        //                    col++;
-        //                }
-        //                fila++;
-        //            }
-        //            ep.SaveAs(ms);
-        //            byte[] buffer = ms.ToArray();
-        //            return buffer;
-        //        }
-        //    }
-        //}
-        public IActionResult Index(MedicamentoL oMedicamentoL)
+       
+        public IActionResult Index()
         {
             List<MedicamentoL> listamedicamento = new List<MedicamentoL>();
             using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                if (oMedicamentoL.Denominacion == null || oMedicamentoL.Denominacion == "")
-                {
+            {              
                     listamedicamento = (from medicamento in db.Medicamento
                                         select new MedicamentoL
                                         {
@@ -125,36 +72,11 @@ namespace Epidemiologia.Controllers
                                             Denominacion = medicamento.Denominacion,
                                             Concentracion = medicamento.Concentracion,
                                             Presentacion=medicamento.Presentacion,
-                                            //Ingresos=medicamento.Ingresos,
                                             Saldo=medicamento.Saldo,
                                             Fecha_Ingreso = medicamento.Fecha_Ingreso,
                                             Observacion = medicamento.Observacion
-                                            //Estado = medicamento.Estado
                                         }).ToList();
-                    ViewBag.descripcion = "";
-                }
-                else
-                {
-                    listamedicamento = (from medicamento in db.Medicamento
-                                        where medicamento.Denominacion.Contains(oMedicamentoL.Denominacion)
-                                        select new MedicamentoL
-                                        {
-                                            MedicamentoId = medicamento.MedicamentoId,
-                                            Cod_sismed = medicamento.Cod_sismed,
-                                            Denominacion = medicamento.Denominacion,
-                                            Concentracion = medicamento.Concentracion,
-                                            Presentacion = medicamento.Presentacion,
-                                            //Ingresos = medicamento.Ingresos,
-                                            Saldo =medicamento.Saldo,
-                                            Fecha_Ingreso = medicamento.Fecha_Ingreso,
-                                            Observacion = medicamento.Observacion
-                                            //Estado = medicamento.Estado
-                                        }).ToList();
-                    ViewBag.Denominacion = (oMedicamentoL.Denominacion);
-                }
-
             }
-            lista = listamedicamento;
             return View(listamedicamento);
         }
         public IActionResult Agregar()
@@ -179,9 +101,8 @@ namespace Epidemiologia.Controllers
                         oMedicamento.Denominacion = oMedicamentoL.Denominacion;
                         oMedicamento.Concentracion = oMedicamentoL.Concentracion;
                         oMedicamento.Presentacion = oMedicamentoL.Presentacion;
-                        //oMedicamento.Ingresos = oMedicamentoL.Ingresos;
                         oMedicamento.Saldo = oMedicamentoL.Saldo;
-                        oMedicamento.Fecha_Ingreso = oMedicamentoL.Fecha_Ingreso;
+                        oMedicamento.Fecha_Ingreso = DateTime.Now;
                         oMedicamento.Observacion = oMedicamentoL.Observacion;
                         oMedicamento.Estado = 1;
                         db.Medicamento.Add(oMedicamento);
