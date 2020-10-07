@@ -9,7 +9,6 @@ namespace Epidemiologia.Class
     {
         public int ResponsableId { get; set; }
         public int PerSalId { get; set; }
-        public int ProfesionId { get; set; }
         public DateTime Fecha_Ingreso { get; set; }
         public int Estado { get; set; }
     }

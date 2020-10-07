@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace Epidemiologia.ListaModelos
 {
     public class MedicamentoL
-    {
-        [Key]
-        public int MedicamentoId { get; set; }
+    {       
+        public int? MedicamentoId { get; set; }
         [MaxLength(150)]
         [Required(ErrorMessage = "Este campo es requerido")]
         [DisplayName("Código SISMED")]

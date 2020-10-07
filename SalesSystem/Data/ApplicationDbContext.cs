@@ -40,5 +40,6 @@ namespace Epidemiologia.Data
         public DbSet<Epidemiologia.Class.PerSal> PerSal { get; set; }    
         public DbSet<Epidemiologia.Class.AgregMedic> AgregMedic { get; set; }
         public DbSet<Epidemiologia.Class.Responsable> Responsable { get; set; }
-    }
+        public DbSet<Epidemiologia.Class.SalidMedic> SalidMedic { get; set; }
+}
 }

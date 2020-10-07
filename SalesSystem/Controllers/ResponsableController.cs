@@ -19,21 +19,19 @@ namespace Epidemiologia.Controllers
             {
                 listamedicamento = (from resp in db.Responsable
                                     join salu in db.PerSal
-                                    on resp.ResponsableId equals salu.PerSalId
-                                    join prof in db. Profesion
-                                    on resp.ProfesionId equals prof.ProfesionId
+                                    on resp.PerSalId equals salu.PerSalId                                   
                                     select new ResponsableL
                                     {
                                         ResponsableId = resp.ResponsableId,
-                                        PersonalSalud = salu.Apellidos+' '+salu.Apellidos,
-                                        Profesion = prof.Descripcion,
-                                        Fecha_Ingreso = resp.Fecha_Ingreso
+                                        Personal = salu.Nombres + ' ' + salu.Apellidos,
+                                        Fecha_Ingreso = DateTime.Now
                                     }).ToList();
             }
             return View(listamedicamento);
         }
         public IActionResult Agregar()
         {
+            //ViewBag.listaProfesion = listaProfesion();
             ViewBag.listaPersonalSalud = listaPersonalSalud();
             return View();
         }
@@ -53,9 +51,8 @@ namespace Epidemiologia.Controllers
                     {
                         Responsable oResponsable = new Responsable();
                         oResponsable.PerSalId = oResponsableL.PerSalId;
-                        oResponsable.ProfesionId = oResponsableL.ProfesionId;
                         oResponsable.Fecha_Ingreso = DateTime.Now;
-                        oResponsable.Estado =1;       
+                        oResponsable.Estado = 1;
                         db.Responsable.Add(oResponsable);
                         db.SaveChanges();
                     }
@@ -74,11 +71,15 @@ namespace Epidemiologia.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 listaPersonalSalud = (from persa in db.PerSal
-                                 select new SelectListItem
-                                 {
-                                     Text = persa.Apellidos + ' ' + persa.Nombres,
-                                     Value = persa.PerSalId.ToString()
-                                 }).ToList();
+                                      join prof in db.Profesion
+                                      on persa.ProfesionId equals prof.ProfesionId
+                                      where prof.Descripcion == "Químico Farmacéutico" || prof.Descripcion == "Técnico en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia I"
+                               || prof.Descripcion == "Técnico/a en Farmacia II"
+                                      select new SelectListItem
+                                      {
+                                          Text = persa.Apellidos + ' ' + persa.Nombres,
+                                          Value = persa.PerSalId.ToString()
+                                      }).ToList();
                 listaPersonalSalud.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",
@@ -88,5 +89,27 @@ namespace Epidemiologia.Controllers
             }
             return listaPersonalSalud;
         }
+        //public List<SelectListItem> listaProfesion()
+        //{
+        //    List<SelectListItem> listaProfesion = new List<SelectListItem>();
+        //    using (ApplicationDbContext db = new ApplicationDbContext())
+        //    {
+        //        listaProfesion = (from prof in db.Profesion
+        //                          where prof.Descripcion == "Químico Farmacéutico" || prof.Descripcion == "Técnico en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia I"
+        //                        || prof.Descripcion == "Técnico/a en Farmacia II"
+        //                          select new SelectListItem
+        //                          {
+        //                              Text = prof.Descripcion,
+        //                              Value = prof.ProfesionId.ToString()
+        //                          }).ToList();
+        //        listaProfesion.Insert(0, new SelectListItem
+        //        {
+        //            Text = "--Selecciona--",
+        //            Value = ""
+        //        });
+
+        //    }
+        //    return listaProfesion;
+        //}
     }
 }

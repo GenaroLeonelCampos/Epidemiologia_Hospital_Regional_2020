@@ -14,13 +14,15 @@ namespace Epidemiologia.Controllers
 {
     public class MedicamentoController : Controller
     {
-        public static List<MedicamentoL> lista;
+        public static List<MedicamentoL> Lista;
         //Metdo para descargar archivo
-        public FileResult exportarExcel()
+        public FileResult ExportarExcel()
         {
-            string[] cabeceras = { "MedicamentoId", "Cod_sismed", "Denominacion", "Concentracion", "Presentacion", "Saldo", "Fecha_Ingreso", "Observacion" };
-            string[] nombrepropiedades = { "MedicamentoId", "Cod_sismed", "Denominacion", "Concentracion", "Presentacion", "Saldo", "Fecha_Ingreso", "Observacion" };
-            byte[] buffer = exportarExcelDatos(cabeceras, nombrepropiedades, lista);
+            string[] cabeceras = { "MedicamentoId"};
+            //string[] cabeceras = { "MedicamentoId", "Cod_sismed", "Denominacion", "Concentracion", "Presentacion", "Saldo", "Fecha_Ingreso", "Observacion" };
+            string[] nombrepropiedades = { "MedicamentoId"};
+            //string[] nombrepropiedades = { "MedicamentoId", "Cod_sismed", "Denominacion", "Concentracion", "Presentacion", "Saldo", "Fecha_Ingreso", "Observacion" };
+            byte[] buffer = exportarExcelDatos(cabeceras, nombrepropiedades, Lista);
             return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         //Genera el array
