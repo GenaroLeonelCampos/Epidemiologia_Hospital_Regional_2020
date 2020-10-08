@@ -421,47 +421,16 @@ namespace Epidemiologia.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DepartamentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DistritoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Fecha_Ingreso")
-                        .IsRequired()
+                    b.Property<DateTime>("Fecha_Ingreso")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PerSalId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProfesionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProvinciaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipdocId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UnidLabId")
+                    b.Property<int>("PerSalId")
                         .HasColumnType("int");
 
                     b.HasKey("ResponsableId");
-
-                    b.HasIndex("DepartamentoId");
-
-                    b.HasIndex("DistritoId");
-
-                    b.HasIndex("ProfesionId");
-
-                    b.HasIndex("ProvinciaId");
-
-                    b.HasIndex("TipdocId");
-
-                    b.HasIndex("UnidLabId");
 
                     b.ToTable("Responsable");
                 });
@@ -834,33 +803,6 @@ namespace Epidemiologia.Data.Migrations
                         .HasForeignKey("DepartamentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Epidemiologia.Class.Responsable", b =>
-                {
-                    b.HasOne("Epidemiologia.Class.Departamento", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("DepartamentoId");
-
-                    b.HasOne("Epidemiologia.Class.Distrito", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("DistritoId");
-
-                    b.HasOne("Epidemiologia.Class.Profesion", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("ProfesionId");
-
-                    b.HasOne("Epidemiologia.Class.Provincia", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("ProvinciaId");
-
-                    b.HasOne("Epidemiologia.Class.Tipdoc", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("TipdocId");
-
-                    b.HasOne("Epidemiologia.Class.UnidLab", null)
-                        .WithMany("Responsable")
-                        .HasForeignKey("UnidLabId");
                 });
 
             modelBuilder.Entity("Epidemiologia.Class.UnidLab", b =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Epidemiologia.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200930133144_Leonel01")]
-    partial class Leonel01
+    [Migration("20201008130731_procedimiento")]
+    partial class procedimiento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,33 @@ namespace Epidemiologia.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("TUsers");
+                });
+
+            modelBuilder.Entity("Epidemiologia.Class.AgregMedic", b =>
+                {
+                    b.Property<int>("AgregMedicId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha_Ingreso")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MedicamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PerSalId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AgregMedicId");
+
+                    b.ToTable("AgregMedic");
                 });
 
             modelBuilder.Entity("Epidemiologia.Class.Cartserv", b =>
@@ -205,43 +232,6 @@ namespace Epidemiologia.Data.Migrations
                     b.ToTable("GrupOcup");
                 });
 
-            modelBuilder.Entity("Epidemiologia.Class.Ingresos", b =>
-                {
-                    b.Property<int?>("IngresosId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Fecha_Ingreso")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MedicamentoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Observacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
-
-                    b.Property<int?>("ResponsableId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IngresosId");
-
-                    b.HasIndex("MedicamentoId");
-
-                    b.HasIndex("ResponsableId");
-
-                    b.ToTable("Ingresos");
-                });
-
             modelBuilder.Entity("Epidemiologia.Class.Medicamento", b =>
                 {
                     b.Property<int>("MedicamentoId")
@@ -268,7 +258,6 @@ namespace Epidemiologia.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Observacion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Presentacion")
@@ -335,9 +324,9 @@ namespace Epidemiologia.Data.Migrations
                     b.Property<string>("NColegio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NdocIden")
+                    b.Property<int?>("NdocIden")
                         .IsRequired()
-                        .HasColumnType("nvarchar(8)")
+                        .HasColumnType("int")
                         .HasMaxLength(8);
 
                     b.Property<string>("Nombres")
@@ -434,109 +423,57 @@ namespace Epidemiologia.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Celular")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Condicion")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Correo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DepartamentoId")
+                    b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Fecha_Ingreso")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("DistritoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NdocIden")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombres")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfesionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProvinciaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipdocId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UnidLabId")
-                        .IsRequired()
+                    b.Property<int>("PerSalId")
                         .HasColumnType("int");
 
                     b.HasKey("ResponsableId");
 
-                    b.HasIndex("DepartamentoId");
-
-                    b.HasIndex("DistritoId");
-
-                    b.HasIndex("ProfesionId");
-
-                    b.HasIndex("ProvinciaId");
-
-                    b.HasIndex("TipdocId");
-
-                    b.HasIndex("UnidLabId");
-
                     b.ToTable("Responsable");
                 });
 
-            modelBuilder.Entity("Epidemiologia.Class.Salidas", b =>
+            modelBuilder.Entity("Epidemiologia.Class.SalidMedic", b =>
                 {
-                    b.Property<int?>("SalidasId")
+                    b.Property<int>("SalidMedicId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Cantidad")
-                        .IsRequired()
+                    b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartservId")
-                        .IsRequired()
+                    b.Property<int>("CartservId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Estado")
+                    b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("FechaDistrib")
-                        .IsRequired()
+                    b.Property<DateTime>("Fecha_salida")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MedicamentoId")
-                        .IsRequired()
+                    b.Property<int>("MedicamentoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PerSalId")
-                        .IsRequired()
+                    b.Property<string>("Observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PerSalId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PertenenciaId")
-                        .IsRequired()
+                    b.Property<int>("PertenenciaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResponsableId")
-                        .IsRequired()
+                    b.Property<int>("ResponsableId")
                         .HasColumnType("int");
 
-                    b.HasKey("SalidasId");
+                    b.HasKey("SalidMedicId");
 
-                    b.ToTable("Salidas");
+                    b.ToTable("SalidMedic");
                 });
 
             modelBuilder.Entity("Epidemiologia.Class.Tipdoc", b =>
@@ -576,149 +513,6 @@ namespace Epidemiologia.Data.Migrations
                     b.HasIndex("CartservId");
 
                     b.ToTable("UnidLab");
-                });
-
-            modelBuilder.Entity("Epidemiologia.ListaModelos.IngresosL", b =>
-                {
-                    b.Property<int?>("IngresosId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Cantidad")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Fecha_Ingreso")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Medicamento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MedicamentoId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Observacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
-
-                    b.Property<string>("Responsable")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ResponsableId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.HasKey("IngresosId");
-
-                    b.ToTable("IngresosL");
-                });
-
-            modelBuilder.Entity("Epidemiologia.ListaModelos.MedicamentoL", b =>
-                {
-                    b.Property<int>("MedicamentoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Cod_sismed")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
-
-                    b.Property<string>("Concentracion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Denominacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Fecha_Ingreso")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Observacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Presentacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Saldo")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedicamentoId");
-
-                    b.ToTable("MedicamentoL");
-                });
-
-            modelBuilder.Entity("Epidemiologia.ListaModelos.SalidasL", b =>
-                {
-                    b.Property<int?>("SalidasId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Cantidad")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CartservId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Estado")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("FechaDistrib")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Medicamento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MedicamentoId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PerSalId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Pertenencia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PertenenciaId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Recepcionante")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Responsable")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ResponsableId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Servicio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SalidasId");
-
-                    b.ToTable("SalidasL");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -965,17 +759,6 @@ namespace Epidemiologia.Data.Migrations
                         .HasForeignKey("UnidLabId");
                 });
 
-            modelBuilder.Entity("Epidemiologia.Class.Ingresos", b =>
-                {
-                    b.HasOne("Epidemiologia.Class.Medicamento", "Medicamento")
-                        .WithMany()
-                        .HasForeignKey("MedicamentoId");
-
-                    b.HasOne("Epidemiologia.Class.Responsable", "Responsable")
-                        .WithMany()
-                        .HasForeignKey("ResponsableId");
-                });
-
             modelBuilder.Entity("Epidemiologia.Class.PerSal", b =>
                 {
                     b.HasOne("Epidemiologia.Class.Cartserv", "Cartserv")
@@ -1020,45 +803,6 @@ namespace Epidemiologia.Data.Migrations
                     b.HasOne("Epidemiologia.Class.Departamento", "Departamento")
                         .WithMany("Provincia")
                         .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Epidemiologia.Class.Responsable", b =>
-                {
-                    b.HasOne("Epidemiologia.Class.Departamento", "Departamento")
-                        .WithMany("Responsable")
-                        .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Epidemiologia.Class.Distrito", "Distrito")
-                        .WithMany("Responsable")
-                        .HasForeignKey("DistritoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Epidemiologia.Class.Profesion", "Profesion")
-                        .WithMany("Responsable")
-                        .HasForeignKey("ProfesionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Epidemiologia.Class.Provincia", "Provincia")
-                        .WithMany("Responsable")
-                        .HasForeignKey("ProvinciaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Epidemiologia.Class.Tipdoc", "Tipdoc")
-                        .WithMany("Responsable")
-                        .HasForeignKey("TipdocId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Epidemiologia.Class.UnidLab", "UnidLab")
-                        .WithMany("Responsable")
-                        .HasForeignKey("UnidLabId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

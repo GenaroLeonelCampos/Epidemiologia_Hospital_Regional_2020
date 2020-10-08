@@ -7,6 +7,7 @@ using Epidemiologia.Data;
 using Epidemiologia.ListaModelos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Epidemiologia.Controllers
 {
@@ -55,43 +56,20 @@ namespace Epidemiologia.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Agregar(SalidMedicL oSalidMedicL)
+        public IActionResult Agregar(SalidMedicL oSalidMedicLL)
         {
-            ViewBag.ListaMedicamento = ListaMedicamento();
-            ViewBag.ListaResponsable = ListaResponsable();
-            ViewBag.ListaCartserv = ListaCartserv();
-            ViewBag.ListaPerSal = ListaPerSal();
-            ViewBag.ListaPertenencia = ListaPertenencia();
-
-            try
+            using (ApplicationDbContext trans = new ApplicationDbContext())
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(oSalidMedicL);
-                }
-                else
-                {
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        SalidMedic oSalidMedic = new SalidMedic();
-                        oSalidMedic.MedicamentoId = (int)oSalidMedicL.MedicamentoId;
-                        oSalidMedic.ResponsableId = (int)oSalidMedicL.ResponsableId;
-                        oSalidMedic.CartservId = (int)oSalidMedicL.CartservId;
-                        oSalidMedic.PerSalId = (int)oSalidMedicL.PerSalId;
-                        oSalidMedic.PertenenciaId = (int)oSalidMedicL.PertenenciaId;
-                        oSalidMedic.Fecha_salida = DateTime.Now;
-                        oSalidMedic.Cantidad = (int)oSalidMedicL.Cantidad;
-                        oSalidMedic.Observacion = oSalidMedicL.Observacion;
-                        oSalidMedic.Estado = 1;
-                        db.SalidMedic.Add(oSalidMedic);
-                        db.SaveChanges();
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                return View(oSalidMedicL);
+                trans.Database.ExecuteSqlCommand("usp_SalidMedic @p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@8"
+                    , oSalidMedicLL.MedicamentoId,
+                    oSalidMedicLL.ResponsableId,
+                     oSalidMedicLL.CartservId,
+                     oSalidMedicLL.PerSalId,
+                     oSalidMedicLL.PertenenciaId,
+                     oSalidMedicLL.Fecha_salida = DateTime.Now,
+                     oSalidMedicLL.Cantidad, 
+                     oSalidMedicLL.Observacion, 
+                     oSalidMedicLL.Estado == 1);
             }
             return RedirectToAction("Index");
         }
@@ -102,11 +80,11 @@ namespace Epidemiologia.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 ListaMedicamento = (from med in db.Medicamento
-                                 select new SelectListItem
-                                 {
-                                     Text = med.Cod_sismed + ' ' + med.Denominacion + ' ' + med.Concentracion + ' ' + med.Presentacion,
-                                     Value = med.MedicamentoId.ToString()
-                                 }).ToList();
+                                    select new SelectListItem
+                                    {
+                                        Text = med.Cod_sismed + ' ' + med.Denominacion + ' ' + med.Concentracion + ' ' + med.Presentacion,
+                                        Value = med.MedicamentoId.ToString()
+                                    }).ToList();
                 ListaMedicamento.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",
@@ -143,12 +121,12 @@ namespace Epidemiologia.Controllers
             List<SelectListItem> ListaCartserv = new List<SelectListItem>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                ListaCartserv = (from cartse in db.Cartserv                                   
-                                    select new SelectListItem
-                                    {
-                                        Text = cartse.Descripcion,
-                                        Value = cartse.CartservId.ToString()
-                                    }).ToList();
+                ListaCartserv = (from cartse in db.Cartserv
+                                 select new SelectListItem
+                                 {
+                                     Text = cartse.Descripcion,
+                                     Value = cartse.CartservId.ToString()
+                                 }).ToList();
                 ListaCartserv.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",
@@ -164,11 +142,11 @@ namespace Epidemiologia.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 ListaPerSal = (from pers in db.PerSal
-                                 select new SelectListItem
-                                 {
-                                     Text = pers.Nombres+' '+pers.Apellidos,
-                                     Value = pers.PerSalId.ToString()
-                                 }).ToList();
+                               select new SelectListItem
+                               {
+                                   Text = pers.Nombres + ' ' + pers.Apellidos,
+                                   Value = pers.PerSalId.ToString()
+                               }).ToList();
                 ListaPerSal.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",
@@ -184,11 +162,11 @@ namespace Epidemiologia.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 ListaPertenencia = (from pert in db.Pertenencia
-                               select new SelectListItem
-                               {
-                                   Text = pert.Descripcion,
-                                   Value = pert.PertenenciaId.ToString()
-                               }).ToList();
+                                    select new SelectListItem
+                                    {
+                                        Text = pert.Descripcion,
+                                        Value = pert.PertenenciaId.ToString()
+                                    }).ToList();
                 ListaPertenencia.Insert(0, new SelectListItem
                 {
                     Text = "--Selecciona--",

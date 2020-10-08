@@ -9,11 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+using System.Data;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Epidemiologia.Controllers
 {
     public class AgregMedicController : Controller
     {
+       
         public IActionResult Index()
         {
             List<AgregMedicL> listaAgregMedic = new List<AgregMedicL>();
@@ -26,7 +32,7 @@ namespace Epidemiologia.Controllers
                                  on AgrMedic.PerSalId equals salud.PerSalId
                                    select new AgregMedicL
                                    {
-                                       AgregMedicId = AgrMedic.AgregMedicId,
+                                       //AgregMedicId = AgrMedic.AgregMedicId,
                                        Medicamento = medi.Cod_sismed + ' ' + medi.Denominacion + ' ' + medi.Concentracion + ' ' + medi.Presentacion,
                                        PersonalSalud = salud.Nombres + ' ' + salud.Apellidos,
                                        Fecha_Ingreso = AgrMedic.Fecha_Ingreso,
@@ -43,38 +49,19 @@ namespace Epidemiologia.Controllers
             ViewBag.listaMedicamento = listaMedicamento();
             return View();
         }
+        
         [HttpPost]
         public IActionResult Agregar(AgregMedicL oAgregMedicL)
         {
-            ViewBag.listaPersonal = listaPersonal();
-            ViewBag.listaMedicamento = listaMedicamento();
-            try
+            using (ApplicationDbContext trans = new ApplicationDbContext())
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(oAgregMedicL);
-                }
-                else
-                {
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        AgregMedic oAgregMedic = new AgregMedic();
-                        oAgregMedic.MedicamentoId = (int)oAgregMedicL.MedicamentoId;
-                        oAgregMedic.PerSalId = (int)oAgregMedicL.PerSalId;
-                        oAgregMedic.Fecha_Ingreso = DateTime.Now;
-                        oAgregMedic.Cantidad = (int)oAgregMedicL.Cantidad;
-                        oAgregMedic.Observacion = oAgregMedicL.Observacion;
-                        db.AgregMedic.Add(oAgregMedic);
-                        db.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return View(oAgregMedicL);
+                trans.Database.ExecuteSqlCommand("usp_AgregMedic @p0,@p1,@p2,@p3,@p4"
+                    , oAgregMedicL.MedicamentoId, oAgregMedicL.PerSalId,
+                     oAgregMedicL.Fecha_Ingreso=DateTime.Now,oAgregMedicL.Cantidad, oAgregMedicL.Observacion);
             }
             return RedirectToAction("Index");
         }
+
         public List<SelectListItem> listaPersonal()
         {
             List<SelectListItem> listaPersonal = new List<SelectListItem>();
