@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace Epidemiologia.Class
 {
     public class SalidMedic
     {
+        [DisplayName("Id")]
         public int SalidMedicId { get; set; }
         public int MedicamentoId { get; set; }
         public int ResponsableId { get; set; }

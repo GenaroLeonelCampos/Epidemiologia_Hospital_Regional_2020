@@ -56,20 +56,12 @@ namespace Epidemiologia.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Agregar(SalidMedicL oSalidMedicLL)
+        public IActionResult Agregar(SalidMedicL oSalidMedicL)
         {
-            using (ApplicationDbContext trans = new ApplicationDbContext())
+            using (var trans = new ApplicationDbContext())
             {
-                trans.Database.ExecuteSqlCommand("usp_SalidMedic @p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@8"
-                    , oSalidMedicLL.MedicamentoId,
-                    oSalidMedicLL.ResponsableId,
-                     oSalidMedicLL.CartservId,
-                     oSalidMedicLL.PerSalId,
-                     oSalidMedicLL.PertenenciaId,
-                     oSalidMedicLL.Fecha_salida = DateTime.Now,
-                     oSalidMedicLL.Cantidad, 
-                     oSalidMedicLL.Observacion, 
-                     oSalidMedicLL.Estado == 1);
+                trans.Database.ExecuteSqlCommand("usp_SalidMedic @p0,@p1,@p2,@p3,@p4,@p5,@p6,@p7"
+                    , oSalidMedicL.MedicamentoId, oSalidMedicL.ResponsableId, oSalidMedicL.CartservId, oSalidMedicL.PerSalId, oSalidMedicL.PertenenciaId, oSalidMedicL.Fecha_salida=DateTime.Now, oSalidMedicL.Cantidad, oSalidMedicL.Observacion);
             }
             return RedirectToAction("Index");
         }

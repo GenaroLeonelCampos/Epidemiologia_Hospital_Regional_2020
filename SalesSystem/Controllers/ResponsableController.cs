@@ -31,7 +31,6 @@ namespace Epidemiologia.Controllers
         }
         public IActionResult Agregar()
         {
-            //ViewBag.listaProfesion = listaProfesion();
             ViewBag.listaPersonalSalud = listaPersonalSalud();
             return View();
         }
@@ -88,28 +87,6 @@ namespace Epidemiologia.Controllers
 
             }
             return listaPersonalSalud;
-        }
-        //public List<SelectListItem> listaProfesion()
-        //{
-        //    List<SelectListItem> listaProfesion = new List<SelectListItem>();
-        //    using (ApplicationDbContext db = new ApplicationDbContext())
-        //    {
-        //        listaProfesion = (from prof in db.Profesion
-        //                          where prof.Descripcion == "Químico Farmacéutico" || prof.Descripcion == "Técnico en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia" || prof.Descripcion == "Técnico/a en Farmacia I"
-        //                        || prof.Descripcion == "Técnico/a en Farmacia II"
-        //                          select new SelectListItem
-        //                          {
-        //                              Text = prof.Descripcion,
-        //                              Value = prof.ProfesionId.ToString()
-        //                          }).ToList();
-        //        listaProfesion.Insert(0, new SelectListItem
-        //        {
-        //            Text = "--Selecciona--",
-        //            Value = ""
-        //        });
-
-        //    }
-        //    return listaProfesion;
-        //}
+        }       
     }
 }
