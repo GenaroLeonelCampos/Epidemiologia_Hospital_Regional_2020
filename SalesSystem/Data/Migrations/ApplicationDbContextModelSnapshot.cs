@@ -319,11 +319,10 @@ namespace Epidemiologia.Data.Migrations
                     b.Property<int>("DistritoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NColegio")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NColegio")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("NdocIden")
-                        .IsRequired()
+                    b.Property<int>("NdocIden")
                         .HasColumnType("int")
                         .HasMaxLength(8);
 

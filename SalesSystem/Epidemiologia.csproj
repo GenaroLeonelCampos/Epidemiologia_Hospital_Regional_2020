@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-Epidemiologia-E77AACAF-DC4D-4BC3-8593-41A06199F232</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Users\Data\**" />
+    <Content Remove="Areas\Users\Data\**" />
+    <EmbeddedResource Remove="Areas\Users\Data\**" />
+    <None Remove="Areas\Users\Data\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="5.2.0" />
@@ -30,7 +37,6 @@
     <Folder Include="Areas\Tipdoc\Controllers\" />
     <Folder Include="Areas\Tipdoc\Data\" />
     <Folder Include="Areas\Tipdoc\Views\" />
-    <Folder Include="Areas\Users\Data\" />
   </ItemGroup>
 
 </Project>

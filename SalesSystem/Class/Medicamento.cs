@@ -14,13 +14,13 @@ namespace Epidemiologia.Class
         [MaxLength(150)]
         [Required(ErrorMessage = "Este campo es requerido")]
         [DisplayName("Código SISMED")]
-        public string? Cod_sismed { get; set; }
+        public string Cod_sismed { get; set; }
         [DisplayName("Denominación")]
-        public string? Denominacion { get; set; }
-        [DisplayName("COncentración")]
-        public string? Concentracion { get; set; }
+        public string Denominacion { get; set; }
+        [DisplayName("Concentración")]
+        public string Concentracion { get; set; }
         [DisplayName("Presentación")]
-        public string? Presentacion { get; set; }
+        public string Presentacion { get; set; }
         [DisplayName("N° Ingresos")]
         //public int? Ingresos { get; set; }
         //[DisplayName("Salso")]

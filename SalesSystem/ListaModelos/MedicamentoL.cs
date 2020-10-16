@@ -18,7 +18,7 @@ namespace Epidemiologia.ListaModelos
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Denominacion { get; set; }
         [DisplayName("Concentración")]
-        [Required(ErrorMessage = "Este campo es requerido")]
+        //[Required(ErrorMessage = "Este campo es requerido")]
         public string Concentracion { get; set; }
         [DisplayName("Presentación")]
         [Required(ErrorMessage = "Este campo es requerido")]
