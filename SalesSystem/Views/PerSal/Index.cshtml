@@ -18,34 +18,34 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ApNom)
-            </th>           
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.NdocIden)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Servicio)
+                @Html.DisplayNameFor(model => model.Profesion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Profesion)
+                @Html.DisplayNameFor(model => model.Correo)
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>          
+        <tr>
             <th>
                 @Html.DisplayFor(modelItem => item.ApNom)
-            </th>          
+            </th>
             <th>
                 @Html.DisplayFor(modelItem => item.NdocIden)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Servicio)
+                @Html.DisplayFor(modelItem => item.Profesion)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Profesion)
-            </th>          
+                @Html.DisplayFor(modelItem => item.Correo)
+            </th>
         </tr>
         }
     </tbody>

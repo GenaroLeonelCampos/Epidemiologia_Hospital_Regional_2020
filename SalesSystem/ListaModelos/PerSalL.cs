@@ -10,27 +10,35 @@ namespace Epidemiologia.ListaModelos
     public class PerSalL
     {
         [DisplayName("Identificación")]
-        public int PerSalId { get; set; }
-        [Required(ErrorMessage = "Este campo es requerido{0}")]
+        public int? PerSalId { get; set; }
+        [Required(ErrorMessage = "Este campo {0} es requerido")]
         [DisplayName("Nombres")]
         public string Nombres { get; set; }
-        [Required(ErrorMessage = "Este campo es requerido{0}")]
+        [Required(ErrorMessage = "Este campo {0} es requerido")]
         [DisplayName("Apellidos")]
         public string Apellidos { get; set; }
-        public int TipdocId { get; set; }
-        [Required(ErrorMessage = "Este campo es requerido{0}")]
+        [DisplayName("Tipo Documento")]
+        public int? TipdocId { get; set; }
+        [Required(ErrorMessage = "Este campo {0} es requerido")]
         [DisplayName("DNI")]
-        public int NdocIden { get; set; }
-        public int CartservId { get; set; }
-        public int ProfesionId { get; set; }
-        [Required(ErrorMessage = "Este campo es requerido{0}")]
+        public int? NdocIden { get; set; }
+        [DisplayName("Servicio")]
+        public int? CartservId { get; set; }
+        [DisplayName("Profesión")]
+        public int? ProfesionId { get; set; }        
         [DisplayName("Colegiatura")]
         public string NColegio { get; set; }
+        [DisplayName("Celular")]
         public string Celular { get; set; }
-        public int DepartamentoId { get; set; }
-        public int ProvinciaId { get; set; }
-        public int DistritoId { get; set; }
+        [DisplayName("Departamento")]
+        public int? DepartamentoId { get; set; }
+        [DisplayName("Provincia")]
+        public int? ProvinciaId { get; set; }
+        [DisplayName("Distrito")]
+        public int? DistritoId { get; set; }
+        [DisplayName("Dirección")]
         public string Direccion { get; set; }
+        [DisplayName("Correo")]
         public string Correo { get; set; }
         public bool Condicion { get; set; }
 
