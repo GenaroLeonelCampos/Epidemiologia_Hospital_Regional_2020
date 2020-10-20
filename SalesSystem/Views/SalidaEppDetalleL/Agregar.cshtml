@@ -1,0 +1,161 @@
+﻿@model Epidemiologia.ListaModelos.SalidaEppDetalleL
+@{
+    ViewData["Title"] = "Index";
+    List<SelectListItem> ListaMedicamento = ViewBag.ListaMedicamento;
+    List<SelectListItem> Lista2 = ViewBag.ListaResponsable;
+    List<SelectListItem> ListaServicio = ViewBag.ListaCartserv;
+    List<SelectListItem> ListaPerSal = ViewBag.ListaPerSal;
+    List<SelectListItem> ListaPertenencia = ViewBag.ListaPertenencia;
+}
+
+<h1>
+    Equipo de protección personal - EPP
+</h1>
+
+@using (Html.BeginForm("Agregar", "SalidaEppDetalleL", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="form-group">
+                <label asp-for="ResponsableId" class="control-label"></label>
+                <select asp-for="ResponsableId" class="form-control" asp-items="@Lista2"></select>
+                <span asp-validation-for="ResponsableId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="CartservId" class="control-label"></label>
+                <select asp-for="CartservId" class="form-control" asp-items="@ListaServicio"></select>
+                <span asp-validation-for="CartservId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="PerSalId" class="control-label"></label>
+                <select asp-for="PerSalId" class="form-control" asp-items="@ListaPerSal"></select>
+                <span asp-validation-for="PerSalId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="PertenenciaId" class="control-label"></label>
+                <select asp-for="PertenenciaId" class="form-control" asp-items="@ListaPertenencia"></select>
+                <span asp-validation-for="PertenenciaId" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="MedicamentoId" class="control-label"></label>
+                <select asp-for="MedicamentoId" class="form-control" asp-items="@ListaMedicamento"></select>
+                <span asp-validation-for="MedicamentoId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Observacion" class="control-label"></label>
+                <input asp-for="Observacion" class="form-control" />
+                <span asp-validation-for="Observacion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label class="control-label" style="color:aliceblue">Acción</label>
+            <div class="form-group">
+                <input value="Agregar" class="form-control btn-dark" type="button" onclick="AgregarMedicamento(); return false;" />
+            </div>
+        </div>
+
+
+        <div id="divMedicamento">
+            <table id="tablaMedicamento" style="width:100%">
+                <tr>
+                    <th>Medicamento</th>
+                    <th>Cantidad</th>
+                    <th>Observacion</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+    </div>
+    <div style="color:#0026ff">
+        @ViewBag.Message
+    </div>
+}
+
+
+
+<script>
+    var num = 0;
+    function AgregarMedicamento() {
+        //let CabeceraSalidaId = document.getElementById("CabeceraSalidaId").value;
+        let MedicamentoId = document.getElementById("MedicamentoId").value;
+        let Cantidad = document.getElementById("Cantidad").value;
+        let Observacion = document.getElementById("Observacion").value;
+
+        let Tabla = document.getElementById("tablaMedicamento");
+        let TR = document.createElement("tr");
+        let TDMedicamentoId = document.createElement("td");
+        //let TDCabeceraSalidaId = document.createElement("td");
+        let TDCantidad = document.createElement("td");
+        let TDObservacion = document.createElement("td");
+        //TR.appendChild(TDCabeceraSalidaId;
+        TR.appendChild(TDMedicamentoId);
+        TR.appendChild(TDCantidad);
+        TR.appendChild(TDObservacion);
+        //TDCabeceraSalidaId.innerHTML = CabeceraSalidaId;
+        TDMedicamentoId.innerHTML = MedicamentoId;
+        TDCantidad.innerHTML = Cantidad;
+        TDObservacion.innerHTML = Observacion;
+        Tabla.appendChild(TR);
+
+        let DivMedicamento = document.getElementById("divMedicamento");
+        let HiddenIndex = document.createElement("input");
+        //let HiddenCabeceraSalidaId = document.createElement("input");
+        let HiddenMedicamentoId = document.createElement("input");
+        let HiddenCantidad = document.createElement("input");
+        let HiddenObservacion = document.createElement("input");
+
+        HiddenIndex.name = "Detalles.Index";
+        HiddenIndex.value = num;
+        HiddenIndex.type = "hidden";
+
+        //HiddenCabeceraSalidaId.name = "SalidaEppDetalleL[" + num + "].CabeceraSalidaId";
+        //HiddenMedicamentoId.value = MedicamentoId;
+        //HiddenMedicamentoId.type = "hidden";
+
+        HiddenMedicamentoId.name = "Detalles[" + num + "].MedicamentoId";
+        HiddenMedicamentoId.value = MedicamentoId;
+        HiddenMedicamentoId.type = "hidden";
+
+        HiddenCantidad.name = "Detalles[" + num + "].Cantidad";
+        HiddenCantidad.value = Cantidad;
+        HiddenCantidad.type = "hidden";
+
+        HiddenObservacion.name = "Detalles[" + num + "].Observacion";
+        HiddenObservacion.value = Observacion;
+        HiddenObservacion.type = "hidden";
+
+        DivMedicamento.appendChild(HiddenIndex);
+        DivMedicamento.appendChild(HiddenMedicamentoId);
+        DivMedicamento.appendChild(HiddenCantidad);
+        DivMedicamento.appendChild(HiddenObservacion);
+
+        //document.getElementById("MedicamentoId").value = " ";
+        document.getElementById("MedicamentoId").value = " ";
+        document.getElementById("Cantidad").value = " ";
+        document.getElementById("Observacion").value = " ";
+
+        num++;
+    }
+</script>
