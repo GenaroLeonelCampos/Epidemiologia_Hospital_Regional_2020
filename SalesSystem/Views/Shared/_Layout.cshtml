@@ -33,11 +33,11 @@
                             @*<li class="nav-item dropdown">
             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
         </li>*@
-                            <li class="nav-item dropdown">
+                           @* <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Mantenimiento</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-area="" asp-controller="Pais" asp-action="Index">Pais</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="Departamento" asp-action="Index">Departamento</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Provincia" asp-action="Index">Provincia</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Distrito" asp-action="Index">Distrito</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Pertenencia" asp-action="Index">Pertenencia</a>
@@ -48,12 +48,12 @@
                                     <a class="dropdown-item" asp-area="" asp-controller="Cartserv" asp-action="Index">Servicio</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="UnidLab" asp-action="Index">Unidad Laboral</a>
                                 </div>
-                            </li>
+                            </li>*@
                             <li class="nav-item  dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Farmacia</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="" asp-controller="Medicamento" asp-action="Index">Almacen de Farmacia</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="AgregMedic" asp-action="Index">Ingresos a Farmacia</a>                                    
+                                    <a class="dropdown-item" asp-area="" asp-controller="Farmsaldo" asp-action="Index">Almacen de Farmacia</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="AgregMedic" asp-action="Index">Ingresos a Farmacia</a>*@                                 
                                 </div>
                             </li>
                             <li class="nav-item  dropdown">
@@ -61,15 +61,15 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-area="Users" asp-controller="Users" asp-action="Users">Lista Usuarios</a>
                                     <a class="dropdown-item" asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Nuevo Usuario</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="PerSal" asp-action="Index">Personal de Salud</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Responsable" asp-action="Index">Responsables de Farmacia</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Empleados" asp-action="Index">Personal de Salud</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="Responsable" asp-action="Index">Responsables de Farmacia</a>*@
                                 </div>
                             </li>
                             <li class="nav-item  dropdown">
                                 <a class="nav-link text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Procesos</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                     <a class="dropdown-item" asp-area="" asp-controller="SalidMedic" asp-action="Index">Salidas 01 insumo a usuarios</a>
-                                     <a class="dropdown-item" asp-area="" asp-controller="SalidaEppDetalleL" asp-action="Agregar">Salidas a usuarios</a>
+                                     @*<a class="dropdown-item" asp-area="" asp-controller="SalidMedic" asp-action="Index">Salidas 01 insumo a usuarios</a>*@
+                                     <a class="dropdown-item" asp-area="" asp-controller="SalidaEppDetalleL" asp-action="Agregar">Salidas EPP</a>
                                 </div>
                             </li>
                         </ul>

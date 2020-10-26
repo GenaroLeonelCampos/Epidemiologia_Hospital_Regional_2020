@@ -39,4 +39,9 @@
     <Folder Include="Areas\Tipdoc\Views\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="Views\Empleados\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

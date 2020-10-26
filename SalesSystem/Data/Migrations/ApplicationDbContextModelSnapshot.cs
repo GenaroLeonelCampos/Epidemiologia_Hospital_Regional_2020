@@ -76,6 +76,36 @@ namespace Epidemiologia.Data.Migrations
                     b.ToTable("AgregMedic");
                 });
 
+            modelBuilder.Entity("Epidemiologia.Class.CabeceraSalida", b =>
+                {
+                    b.Property<int>("CabeceraSalidaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartservId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha_salida")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PerSalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PertenenciaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResponsableId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CabeceraSalidaId");
+
+                    b.ToTable("CabeceraSalida");
+                });
+
             modelBuilder.Entity("Epidemiologia.Class.Cartserv", b =>
                 {
                     b.Property<int>("CartservId")
@@ -159,6 +189,30 @@ namespace Epidemiologia.Data.Migrations
                     b.ToTable("Depmedico");
                 });
 
+            modelBuilder.Entity("Epidemiologia.Class.DetalleSalida", b =>
+                {
+                    b.Property<int>("DetalleSalidaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CabeceraSalidaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DetalleSalidaId");
+
+                    b.ToTable("DetalleSalida");
+                });
+
             modelBuilder.Entity("Epidemiologia.Class.Distrito", b =>
                 {
                     b.Property<int>("DistritoId")
@@ -179,6 +233,87 @@ namespace Epidemiologia.Data.Migrations
                     b.HasIndex("ProvinciaId");
 
                     b.ToTable("Distrito");
+                });
+
+            modelBuilder.Entity("Epidemiologia.Class.Empleados", b =>
+                {
+                    b.Property<int>("IdEmpleado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApellidoMaterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApellidoPaterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Clave")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPlanilla")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dni")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("EsActivo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("FechaAlta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaIngreso")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaNacimiento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HisCodigoDigitador")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdCondicionTrabajo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdEstablecimientoExterno")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdPais")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdSupervisor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdTipoDestacado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdTipoDocumento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipoEmpleado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdTipoSexo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LoginEstado")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginPc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("ReniecAutorizado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Usuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEmpleado");
+
+                    b.ToTable("Empleados");
                 });
 
             modelBuilder.Entity("Epidemiologia.Class.Establecimiento", b =>
@@ -252,7 +387,6 @@ namespace Epidemiologia.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Fecha_Ingreso")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Observacion")
@@ -286,6 +420,30 @@ namespace Epidemiologia.Data.Migrations
                     b.ToTable("Pais");
                 });
 
+            modelBuilder.Entity("Epidemiologia.Class.Paises", b =>
+                {
+                    b.Property<int>("IdPais")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPostal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IndFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdPais");
+
+                    b.ToTable("Paises");
+                });
+
             modelBuilder.Entity("Epidemiologia.Class.PerSal", b =>
                 {
                     b.Property<int>("PerSalId")
@@ -295,8 +453,7 @@ namespace Epidemiologia.Data.Migrations
 
                     b.Property<string>("Apellidos")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CartservId")
                         .HasColumnType("int");
@@ -319,17 +476,16 @@ namespace Epidemiologia.Data.Migrations
                     b.Property<int>("DistritoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NColegio")
-                        .HasColumnType("int");
+                    b.Property<string>("NColegio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NdocIden")
-                        .HasColumnType("int")
-                        .HasMaxLength(8);
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombres")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProfesionId")
                         .HasColumnType("int");
@@ -488,6 +644,21 @@ namespace Epidemiologia.Data.Migrations
                     b.HasKey("TipdocId");
 
                     b.ToTable("Tipdoc");
+                });
+
+            modelBuilder.Entity("Epidemiologia.Class.TiposSexo", b =>
+                {
+                    b.Property<int>("IdTipoSexo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdTipoSexo");
+
+                    b.ToTable("TiposSexo");
                 });
 
             modelBuilder.Entity("Epidemiologia.Class.UnidLab", b =>
@@ -758,37 +929,37 @@ namespace Epidemiologia.Data.Migrations
 
             modelBuilder.Entity("Epidemiologia.Class.PerSal", b =>
                 {
-                    b.HasOne("Epidemiologia.Class.Cartserv", "Cartserv")
+                    b.HasOne("Epidemiologia.Class.Cartserv", null)
                         .WithMany("PerSal")
                         .HasForeignKey("CartservId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Epidemiologia.Class.Departamento", "Departamento")
+                    b.HasOne("Epidemiologia.Class.Departamento", null)
                         .WithMany("PerSal")
                         .HasForeignKey("DepartamentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Epidemiologia.Class.Distrito", "Distrito")
+                    b.HasOne("Epidemiologia.Class.Distrito", null)
                         .WithMany("PerSal")
                         .HasForeignKey("DistritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Epidemiologia.Class.Profesion", "Profesion")
+                    b.HasOne("Epidemiologia.Class.Profesion", null)
                         .WithMany("PerSal")
                         .HasForeignKey("ProfesionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Epidemiologia.Class.Provincia", "Provincia")
+                    b.HasOne("Epidemiologia.Class.Provincia", null)
                         .WithMany("PerSal")
                         .HasForeignKey("ProvinciaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Epidemiologia.Class.Tipdoc", "Tipdoc")
+                    b.HasOne("Epidemiologia.Class.Tipdoc", null)
                         .WithMany("PerSal")
                         .HasForeignKey("TipdocId")
                         .OnDelete(DeleteBehavior.Cascade)

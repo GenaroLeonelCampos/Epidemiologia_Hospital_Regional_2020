@@ -32,6 +32,13 @@ namespace Epidemiologia
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Conexion")));
 
+            //services.AddDbContext<ApplicationDbContext2>(options =>
+            //options.UseSqlServer(
+            //    Configuration.GetConnectionString("ConexionSigh")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //   options.UseSqlServer(
+            //       Configuration.GetConnectionString("Conexion2")));
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

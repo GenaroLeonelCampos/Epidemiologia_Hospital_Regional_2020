@@ -60,7 +60,7 @@ namespace Epidemiologia.Controllers
             {
                 var result = await _user.UserLoginAsync(model);
                 if (result.Succeeded)
-                {
+                {                   
                     return Redirect("/Principal/Principal");
                 }
                 else

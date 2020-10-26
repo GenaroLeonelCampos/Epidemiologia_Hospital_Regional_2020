@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Epidemiologia.Class.Farmsaldo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--<ol class="breadcrumb  badge-dark">
+    <table class="egt col-md-12">
+        <tr>
+            <td align="left"> <h2>Personal de salud</h2></td>-->
+            @*<td align="right"><h1><a asp-action="exportarExcel" asp-controller="Responsable" class="btn btn-light"><i class="fa fa-print" aria-hidden="true"></i></a></h1></td>*@
+           @* <td align="right"><h1><a asp-action="Agregar" class="btn btn-warning"><i class="fa fa-plus-square" aria-hidden="true"></i></a></h1></td>*@
+        <!--</tr>
+    </table>
+</ol>-->
+<table class="table" id="table">
+    <thead class="badge-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Almacen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoSalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Almacen)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Producto)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.TipoSalida)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </th>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/sweetalert.js"></script>
